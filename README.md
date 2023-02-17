@@ -4,10 +4,10 @@ Um joguinho de luta para a aplicação de conceitos de Processos de Software
 
 ## **1. Definição da Equipe do Projeto**
 
-> 1. **Engenheiro de Software** - Thiago Barros
-> 2. **Engenheiro de Requisitos** - Pedro Mota
-> 3. **Desenvolvedora** - Mylena Mahatma
-> 4. **Engenheiro de Qualidade e Processos** - Jonas Henrique
+> - **Engenheiro de Software** - Thiago Barros
+> - **Engenheiro de Requisitos** - Pedro Mota
+> - **Desenvolvedora** - Mylena Mahatma
+> - **Engenheiro de Qualidade e Processos** - Jonas Henrique
 
 ## **2. Objetivos do Projeto**
 
