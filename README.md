@@ -27,7 +27,7 @@ O jogo tem como propósito auxiliar o engajamento de novas pessoas na área de e
 
 ## **3. Premissas para o Projeto**
 
-- O engenheiro de software, Thiago Barros, estará disponível de segunda a quarta, durante meio período. Pedro Mota, engenheiro de requisitos, estará disponível para trabalhar na aplicação de segunda à sexta durante meio período. Mylena Mahatma, desenvolvedora, estará disponível para trabalhar na aplicação de segunda à sexta durante meio período.Por fim, o engenheiro de qualidade e processos, Jonas Henrique, também estará disponível nesses horários.
+- O engenheiro de software, Thiago Barros, estará disponível de segunda a quarta, durante meio período. Pedro Mota, engenheiro de requisitos, estará disponível para trabalhar na aplicação de segunda à sexta durante meio período. Mylena Mahatma, desenvolvedora, estará disponível para trabalhar na aplicação de segunda à sexta durante meio período. Por fim, o engenheiro de qualidade e processos, Jonas Henrique, também estará disponível nesses horários.
 
 - Para cada membro da equipe será atribuída uma atividade semanalmente, e a cada fim de semana é entregue o que se foi atribuído, faz-se necessário que atrelado a conclusão do objetivo semanal, tenha um relatório documentando os passos para se chegar a solução final da problemática.
 
