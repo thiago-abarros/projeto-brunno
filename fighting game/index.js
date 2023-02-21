@@ -128,6 +128,35 @@ function rectangularCollision({rectangular1, rectangular2}) {
 	    rectangular1.attackBox.position.y <= rectangular2.position.y + rectangular2.height 
 		)
 }
+function determineWinner({player, enemy, timerId}) {
+	clearTimeout(timerId)
+	document.querySelector('#displayText').style.display = 'flex'
+if(player.health === enemy.health) {
+	document.querySelector('#displayText').innerHTML = 'Empate'
+} else if (player.health > enemy.health) {
+	document.querySelector('#displayText').innerHTML = 'Jogador 1 Ganhou'
+} else if ( player.health < enemy.health){
+	document.querySelector('#displayText').innerHTML = 'Jogador 2 Ganhou'
+}
+}
+
+let timer = 60
+let timerId
+function decreaseTimer() {
+if (timer > 0)
+{
+timerId = setTimeout(decreaseTimer,1000)
+	timer--
+document.querySelector('#timer').innerHTML = timer
+}
+
+if(timer === 0){
+
+	determineWinner({player, enemy, timerId})
+}
+}
+
+decreaseTimer()
 
 function animate() {
 	window.requestAnimationFrame(animate)
@@ -176,6 +205,11 @@ enemy.velocity.x = 0
 	 	enemy.isAttacking = false
 	  player.health -= 20
 		document.querySelector('#playerHealth').style.width = player.health + '%'
+	}
+
+	// Fim do Jogo pela Vida 
+	if (enemy.health <= 0 || player.health <= 0 ){
+		determineWinner({player, enemy, timerId})
 	}
 
 }
