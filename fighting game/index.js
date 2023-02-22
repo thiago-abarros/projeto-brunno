@@ -252,7 +252,6 @@ window.addEventListener('keydown', (event) =>{
 	console.log(event.key)
 })
 
-	
 
 window.addEventListener('keyup',(event) =>{
 	switch(event.key){
