@@ -18,11 +18,12 @@ const background = new Sprite({
 
 const shop = new Sprite({
 	position: {
-		x: 0,
-		y: 0
+		x: 600,
+		y: 128
 	},
 	imageSrc: './img/shop.png',
-	scale: 2.75
+	scale: 2.75,
+	framesMax: 6
 })
 
 const player = new Fighter({
@@ -148,7 +149,7 @@ window.addEventListener('keydown', (event) =>{
 		player.lastKey = 'a'
 		break
 	case 'w':
-		player.velocity.y = -20
+		if(player.velocity.y == 0) player.velocity.y = -20
 		break
 
 	case' ':
@@ -164,7 +165,7 @@ window.addEventListener('keydown', (event) =>{
 		enemy.lastKey = 'ArrowLeft' 
 		break
 	case 'ArrowUp':
-		enemy.velocity.y = -20
+		if(enemy.velocity.y == 0) enemy.velocity.y = -20
 		break
 	case 'ArrowDown':
 		enemy.isAttacking = true
