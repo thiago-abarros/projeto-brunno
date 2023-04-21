@@ -182,40 +182,40 @@ enemy.velocity.x = 0
 
 //movimento do jogador
 	
-	if(keys.a.pressed && player.lastKey === 'a') {
-		player.velocity.x = -5
-		player.switchSprite('run')		
-	} else if (keys.d.pressed && player.lastKey === 'd') {
-		player.velocity.x = 5
-		player.switchSprite('run')
-	} else {
-		player.switchSprite('idle')
-	}
+	if (keys.a.pressed && player.lastKey === 'a') {
+    player.velocity.x = -5
+    player.switchSprite('run')
+  } else if (keys.d.pressed && player.lastKey === 'd') {
+    player.velocity.x = 5
+    player.switchSprite('run')
+  } else {
+    player.switchSprite('idle')
+  }
 
 //Pulando
-	if(player.velocity.y < 0) {
-		player.switchSprite('jump')
-	} else if (player.velocity.y > 0) {
-	player.switchSprite('fall')		
-	}
+	 if (player.velocity.y < 0) {
+    player.switchSprite('jump')
+  } else if (player.velocity.y > 0) {
+    player.switchSprite('fall')
+  }
 
 	//movimento do inimigo
-	if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
-		enemy.velocity.x = -5
-		enemy.switchSprite('run')
-	} else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
-		enemy.velocity.x = 5
-		enemy.switchSprite('run')
-		} else {
-		enemy.switchSprite('idle')
-	}
+	if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
+    enemy.velocity.x = -5
+    enemy.switchSprite('run')
+  } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+    enemy.velocity.x = 5
+    enemy.switchSprite('run')
+  } else {
+    enemy.switchSprite('idle')
+  }
 
 	//Pulando
-	if(enemy.velocity.y < 0) {
-		enemy.switchSprite('jump')
-	} else if (enemy.velocity.y > 0) {
-	enemy.switchSprite('fall')	
-	}
+	if (enemy.velocity.y < 0) {
+    enemy.switchSprite('jump')
+  } else if (enemy.velocity.y > 0) {
+    enemy.switchSprite('fall')
+  }
 	
 	//detector de colisão  e inimigo hit
 	if (
@@ -232,9 +232,9 @@ enemy.velocity.x = 0
 	}
 
 	//se o jogador não acerta
-	if(player.isAttacking && player.framesCurrent === 4) {
-		player.isAttacking = false
-	}
+	if (player.isAttacking && player.framesCurrent === 4) {
+    player.isAttacking = false
+  }
 
 	//onde o jogador é atingido 
 
@@ -263,7 +263,7 @@ enemy.velocity.x = 0
 }
 
 animate()
-window.addEventListener('keydown', (event) =>{
+window.addEventListener('keydown', (event) => {
 	if (!player.dead) {
 switch (event.key) {
 	case 'd':

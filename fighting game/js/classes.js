@@ -61,7 +61,7 @@ class Sprite {
 			scale,
 			framesMax,
 			offset
-			});
+			})
 		
 		this.velocity = velocity;
 		this.width = 50;
@@ -75,7 +75,7 @@ class Sprite {
 			offset: attackBox.offset,
 			width: attackBox.width ,
 			height: attackBox.height
-		};
+		}
 		this.color = color;
 		this.isAttacking;
 		this.health = 100;
@@ -166,11 +166,11 @@ class Sprite {
 				this.framesCurrent = 0
 			}
 			break;
-		case ' run':
-			if(this.image !== this.sprites.run.image) {
-				this.image = this.sprites.run.image
-				this.framesMax = this.sprites.run.framesMax
-				this.framesCurrent = 0
+		case 'run':
+        if (this.image !== this.sprites.run.image) {
+          this.image = this.sprites.run.image
+          this.framesMax = this.sprites.run.framesMax
+          this.framesCurrent = 0
 			}
 			break;
 		case 'jump':
