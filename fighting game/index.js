@@ -25,6 +25,7 @@ const shop = new Sprite({
 	scale: 2.75,
 	framesMax: 6
 })
+
 const player = new Fighter({
 	position: {
 		x:0,
@@ -65,6 +66,10 @@ const player = new Fighter({
 		attack1: {
 			imageSrc:'./img/samuraiMack/Attack1.png',
 			framesMax: 7
+		},
+		takeHit: {
+			imageSrc:'./img/samuraiMack/Take hit.png',
+			framesMax: 3
 		}
 	},
 	attackBox: {
@@ -119,6 +124,10 @@ const enemy = new Fighter({
 		attack1: {
 			imageSrc:'./img/kenji/Attack1.png',
 			framesMax: 7
+		},
+		takeHit: {
+			imageSrc:'./img/kenji/Take hit.png',
+			framesMax: 3
 		}
 	},
 	attackBox: {
@@ -200,7 +209,7 @@ enemy.velocity.x = 0
 	enemy.switchSprite('fall')	
 	}
 	
-	//detector de colisão 
+	//detector de colisão  e inimigo hit
 	if (
 		rectangularCollision({
 			rectangular1: player,
@@ -208,8 +217,8 @@ enemy.velocity.x = 0
 		}) && 
 	  player.isAttacking && player.framesCurrent === 4
 	 ){
+	 	enemy.takeHit()
 	 	player.isAttacking = false
-	 enemy.health -= 20
 		document.querySelector('#enemyHealth').style.width = enemy.health + '%'
 	}
 
@@ -217,6 +226,8 @@ enemy.velocity.x = 0
 	if(player.isAttacking && player.framesCurrent === 4) {
 		player.isAttacking = false
 	}
+
+	//onde o jogador é atingido 
 
 	if (
 		rectangularCollision({
@@ -226,8 +237,8 @@ enemy.velocity.x = 0
 	  enemy.isAttacking && 
 	   enemy.framesCurrent === 1
 	 ){
-	 	enemy.isAttacking = false
-	  player.health -= 20
+	  player.takeHit()
+	  enemy.isAttacking = false
 		document.querySelector('#playerHealth').style.width = player.health + '%'
 	}
 		//se o inimigo não acerta
