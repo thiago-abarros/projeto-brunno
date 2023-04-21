@@ -1,9 +1,13 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+
 canvas.width = 1024
 canvas.height = 576
+
 c.fillRect(0, 0, canvas.width, canvas.height)
+
 const gravity = 0.7 
+
 const background = new Sprite({
 	position: {
 		x: 0,
@@ -11,6 +15,7 @@ const background = new Sprite({
 	},
 	imageSrc: './img/background.png'
 })
+
 const shop = new Sprite({
 	position: {
 		x: 600,
@@ -78,9 +83,39 @@ const enemy = new Fighter({
 	offset:{
 		x: -50,
 		y:0
+	},
+	imageSrc: './img/kenji/Idle.png',
+	framesMax:8,
+	scale: 2.5,
+	offset: {
+		x:168,
+		y:268
+	},
+	sprites: {
+		idle: {
+			imageSrc:'./img/kenji/Idle.png',
+			framesMax: 8
+		},
+		run: {
+			imageSrc:'./img/kenji/Run.png',
+			framesMax: 8
+		},
+		jump: {
+			imageSrc:'./img/kenji/Jump.png',
+			framesMax: 2
+		},
+		fall: {
+			imageSrc:'./img/kenji/Fall.png',
+			framesMax: 2
+		},
+		attack1: {
+			imageSrc:'./img/kenji/Attack1.png',
+			framesMax: 8
+		}
 	}
 })
 console.log(player)
+
 const keys = {
 	a: {
 		pressed: false
@@ -99,6 +134,7 @@ const keys = {
 	}
 }
 decreaseTimer()
+
 function animate() {
 	window.requestAnimationFrame(animate)
 	c.fillStyle = 'black'
@@ -106,7 +142,7 @@ function animate() {
 	background.update()
 	shop.update()
 	player.update()
-	//enemy.update()
+	enemy.update()
 player.velocity.x = 0
 enemy.velocity.x = 0
 
@@ -132,8 +168,19 @@ enemy.velocity.x = 0
 	//movimento do inimigo
 	if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
 		enemy.velocity.x = -5
+		enemy.switchSprite('run')
 	} else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
 		enemy.velocity.x = 5
+		enemy.switchSprite('run')
+		} else {
+		enemy.switchSprite('idle')
+	}
+
+	//Pulando
+	if(enemy.velocity.y < 0) {
+		enemy.switchSprite('jump')
+	} else if (enemy.velocity.y > 0) {
+	enemy.switchSprite('fall')	
 	}
 	//detector de colisão 
 	if (
@@ -192,7 +239,7 @@ window.addEventListener('keydown', (event) =>{
 		if(enemy.velocity.y == 0) enemy.velocity.y = -20
 		break
 	case 'ArrowDown':
-		enemy.isAttacking = true
+		enemy.attack()
 		break
 	 	}
 	})
