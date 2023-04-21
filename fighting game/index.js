@@ -1,13 +1,9 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-
 canvas.width = 1024
 canvas.height = 576
-
 c.fillRect(0, 0, canvas.width, canvas.height)
-
 const gravity = 0.7 
-
 const background = new Sprite({
 	position: {
 		x: 0,
@@ -15,7 +11,6 @@ const background = new Sprite({
 	},
 	imageSrc: './img/background.png'
 })
-
 const shop = new Sprite({
 	position: {
 		x: 600,
@@ -25,7 +20,6 @@ const shop = new Sprite({
 	scale: 2.75,
 	framesMax: 6
 })
-
 const player = new Fighter({
 	position: {
 		x:0,
@@ -54,9 +48,17 @@ const player = new Fighter({
 		run: {
 			imageSrc:'./img/samuraiMack/Run.png',
 			framesMax: 8
+		},
+		jump: {
+			imageSrc:'./img/samuraiMack/Jump.png',
+			framesMax: 3
+		},
+		fall: {
+			imageSrc:'./img/samuraiMack/Fall.png',
+			framesMax: 3
 		}
 	}
-		
+
 })
 
 const enemy = new Fighter({
@@ -75,7 +77,6 @@ const enemy = new Fighter({
 	}
 })
 console.log(player)
-
 const keys = {
 	a: {
 		pressed: false
@@ -93,9 +94,7 @@ const keys = {
 		pressed: false
 	}
 }
-
 decreaseTimer()
-
 function animate() {
 	window.requestAnimationFrame(animate)
 	c.fillStyle = 'black'
@@ -104,18 +103,26 @@ function animate() {
 	shop.update()
 	player.update()
 	//enemy.update()
-
 player.velocity.x = 0
 enemy.velocity.x = 0
 
 //movimento do jogador
-	player.image = player.sprites.idle.image
+	
 	if(keys.a.pressed && player.lastKey === 'a'){
 		player.velocity.x = -5
-		player.image = player.sprites.run.image
+		player.switchSprite('run')		
 	} else if (keys.d.pressed && player.lastKey === 'd') {
 		player.velocity.x = 5
-		player.image = player.sprites.run.image
+		player.switchSprite('run')
+	} else {
+		player.switchSprite('idle')
+	}
+
+//Pulando
+	if(player.velocity.y < 0) {
+		player.switchSprite('jump')
+	} else if (player.velocity.y > 0) {
+	player.switchSprite('fall')		
 	}
 
 	//movimento do inimigo
@@ -124,7 +131,6 @@ enemy.velocity.x = 0
 	} else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
 		enemy.velocity.x = 5
 	}
-
 	//detector de colisão 
 	if (
 		rectangularCollision({
@@ -137,7 +143,6 @@ enemy.velocity.x = 0
 	 enemy.health -= 20
 		document.querySelector('#enemyHealth').style.width = enemy.health + '%'
 	}
-
 	if (
 		rectangularCollision({
 			rectangular1: enemy,
@@ -149,16 +154,12 @@ enemy.velocity.x = 0
 	  player.health -= 20
 		document.querySelector('#playerHealth').style.width = player.health + '%'
 	}
-
 	// Fim do Jogo pela Vida 
 	if (enemy.health <= 0 || player.health <= 0 ){
 		determineWinner({player, enemy, timerId})
 	}
-
 }
-
 animate()
-
 window.addEventListener('keydown', (event) =>{
 	switch (event.key) {
 	case 'd':
@@ -172,11 +173,9 @@ window.addEventListener('keydown', (event) =>{
 	case 'w':
 		if(player.velocity.y == 0) player.velocity.y = -20
 		break
-
 	case' ':
 		player.attack()
 		break
-
 	case 'ArrowRight':
 		keys.ArrowRight.pressed = true
 		enemy.lastKey = 'ArrowRight'
@@ -193,9 +192,7 @@ window.addEventListener('keydown', (event) =>{
 		break
 	 	}
 	})
-
 	
-
 window.addEventListener('keyup',(event) =>{
 	switch(event.key){
 	case 'd':
@@ -208,7 +205,6 @@ window.addEventListener('keyup',(event) =>{
 		keys.w.pressed = false
 		break
 	}
-
 	// teclas do inimigo
 	switch(event.key){
 	case 'ArrowRight':
