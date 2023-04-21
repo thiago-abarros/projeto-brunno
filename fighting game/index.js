@@ -66,6 +66,14 @@ const player = new Fighter({
 			imageSrc:'./img/samuraiMack/Attack1.png',
 			framesMax: 7
 		}
+	},
+	attackBox: {
+		offset: {
+			x: 63,
+			y:50
+		},
+		width:95,
+		height:50
 	}
 
 })
@@ -112,6 +120,14 @@ const enemy = new Fighter({
 			imageSrc:'./img/kenji/Attack1.png',
 			framesMax: 7
 		}
+	},
+	attackBox: {
+		offset: {
+			x: -100,
+			y:50
+		},
+		width:100,
+		height:50
 	}
 })
 console.log(player)
@@ -183,34 +199,49 @@ enemy.velocity.x = 0
 	} else if (enemy.velocity.y > 0) {
 	enemy.switchSprite('fall')	
 	}
+	
 	//detector de colisão 
 	if (
 		rectangularCollision({
 			rectangular1: player,
 			rectangular2: enemy
 		}) && 
-	  player.isAttacking 
+	  player.isAttacking && player.framesCurrent === 4
 	 ){
 	 	player.isAttacking = false
 	 enemy.health -= 20
 		document.querySelector('#enemyHealth').style.width = enemy.health + '%'
 	}
+
+	//se o jogador não acerta
+	if(player.isAttacking && player.framesCurrent === 4) {
+		player.isAttacking = false
+	}
+
 	if (
 		rectangularCollision({
 			rectangular1: enemy,
 			rectangular2: player
 		}) && 
-	  enemy.isAttacking 
+	  enemy.isAttacking && 
+	   enemy.framesCurrent === 1
 	 ){
 	 	enemy.isAttacking = false
 	  player.health -= 20
 		document.querySelector('#playerHealth').style.width = player.health + '%'
 	}
+		//se o inimigo não acerta
+	if(enemy.isAttacking && enemy.framesCurrent === 1) {
+		enemy.isAttacking = false
+	}
+
+
 	// Fim do Jogo pela Vida 
 	if (enemy.health <= 0 || player.health <= 0 ){
 		determineWinner({player, enemy, timerId})
 	}
 }
+
 animate()
 window.addEventListener('keydown', (event) =>{
 	switch (event.key) {
@@ -270,4 +301,3 @@ window.addEventListener('keyup',(event) =>{
 		break
 	}	
 })
-
