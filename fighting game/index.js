@@ -89,7 +89,7 @@ const enemy = new Fighter({
 	scale: 2.5,
 	offset: {
 		x:168,
-		y:268
+		y:93
 	},
 	sprites: {
 		idle: {
@@ -110,7 +110,7 @@ const enemy = new Fighter({
 		},
 		attack1: {
 			imageSrc:'./img/kenji/Attack1.png',
-			framesMax: 8
+			framesMax: 7
 		}
 	}
 })
@@ -143,12 +143,13 @@ function animate() {
 	shop.update()
 	player.update()
 	enemy.update()
+
 player.velocity.x = 0
 enemy.velocity.x = 0
 
 //movimento do jogador
 	
-	if(keys.a.pressed && player.lastKey === 'a'){
+	if(keys.a.pressed && player.lastKey === 'a') {
 		player.velocity.x = -5
 		player.switchSprite('run')		
 	} else if (keys.d.pressed && player.lastKey === 'd') {
@@ -166,7 +167,7 @@ enemy.velocity.x = 0
 	}
 
 	//movimento do inimigo
-	if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
+	if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
 		enemy.velocity.x = -5
 		enemy.switchSprite('run')
 	} else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
